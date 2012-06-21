@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>BlockPuzzle - {% block title %}Homepage{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Block puzzle game">
+        <meta name="author" content="Julien Brochet">
+
+        {% stylesheets filter="?yui_css" output="css/frontend.css"
+            '@BlockPuzzleBundle/Resources/public/css/bootstrap.css'
+            '@BlockPuzzleBundle/Resources/public/css/design.css'
+        %}
+        <link rel="stylesheet" type="text/css" href="{{ asset_url }}" />
+        {% endstylesheets %}
+    </head>
+    <body>
+        <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="brand" href="{{ path('homepage') }}">Block Puzzle</a>
+                    <ul class="nav">
+                        <li class="active"><a href="{{ path('homepage') }}">Home</a></li>
+                        <li><a href="#">Singleplayer</a></li>
+                        <li><a href="#">Multiplayer</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            {% block content %}{% endblock %}
+        </div>
+    </body>
+</html>

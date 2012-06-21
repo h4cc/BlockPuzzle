@@ -1,0 +1,2 @@
+_block_puzzle:
+    resource: '@BlockPuzzleBundle/Resources/config/routing.yml'
