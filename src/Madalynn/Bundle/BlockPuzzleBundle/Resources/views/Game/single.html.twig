@@ -1,0 +1,17 @@
+{% extends "BlockPuzzleBundle::layout.html.twig" %}
+
+{% block javascripts %}
+    <script>
+        var tetrads = new Array();
+
+        {% for tetrad in level.tetrads -%}
+            tetrads.push({{ tetrad.toArray|json_encode|raw }});
+        {% endfor %}
+    </script>
+    <script src="{{ asset('/bundles/blockpuzzle/js/single.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+    <canvas id="canvas">
+    </canvas>
+{% endblock %}
