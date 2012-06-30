@@ -23,6 +23,8 @@ class GeneratorFile implements GeneratorInterface
                         ->in(__DIR__.'/../Resources/fixtures')
                         ->name('*.xml');
 
+        // @todo add the difficulty to the finder
+
         $files = iterator_to_array($iterator);
         $file  = $files[array_rand($files)];
         $level = new Level();

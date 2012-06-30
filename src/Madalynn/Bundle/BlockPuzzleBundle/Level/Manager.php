@@ -45,8 +45,9 @@ class Manager
     }
 
     /**
+     * Generates a new level
      *
-     * @param int $difficulty
+     * @param int $difficulty The difficulty
      */
     public function create($difficulty = GeneratorInterface::EASY)
     {

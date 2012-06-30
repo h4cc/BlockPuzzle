@@ -14,7 +14,7 @@ namespace Madalynn\Bundle\BlockPuzzleBundle\Document;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
 /**
- * @MongoDB\Document(repositoryClass="Madalynn\Bundle\BlockPuzzleBundle\Repository\TetradRepository")
+ * @MongoDB\EmbeddedDocument
  */
 class Tetrad
 {
@@ -146,17 +146,5 @@ class Tetrad
     public function setY($y)
     {
         $this->y = $y;
-    }
-
-    public function toArray()
-    {
-        return array(
-            'color'  => $this->getColor(),
-            'width'  => $this->getWidth(),
-            'height' => $this->getHeight(),
-            'blocks' => $this->getBlocks(),
-            'x'      => 0,
-            'y'      => 0
-        );
     }
 }

@@ -32,6 +32,7 @@ class BlockPuzzleExtension extends Extension
 
         $loader->load('generator.xml');
         $loader->load('manager.xml');
+        $loader->load('model.xml');
     }
 
     /**

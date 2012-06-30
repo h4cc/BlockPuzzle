@@ -13,6 +13,7 @@ namespace Madalynn\Bundle\BlockPuzzleBundle\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use Doctrine\Common\Collections\ArrayCollection;
+use Madalynn\Bundle\BlockPuzzleBundle\Util\KeyGenerator;
 
 /**
  * @MongoDB\Document(repositoryClass="Madalynn\Bundle\BlockPuzzleBundle\Repository\LevelRepository")
@@ -20,7 +21,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 class Level
 {
     /**
-     * @MongoDB\Id
+     * @MongoDB\Id(strategy="none")
      */
     protected $id;
 
@@ -54,6 +55,7 @@ class Level
      */
     public function __construct()
     {
+        $this->id = KeyGenerator::generate(8);
         $this->tetrads = new ArrayCollection();
     }
 
@@ -145,6 +147,7 @@ class Level
     public function setFinish($finish)
     {
         $this->finish = $finish;
+
         return $this;
     }
 

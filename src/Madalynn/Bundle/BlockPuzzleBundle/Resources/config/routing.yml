@@ -2,6 +2,10 @@ homepage:
     pattern: /
     defaults: { _controller: BlockPuzzleBundle:Main:homepage }
 
-single:
-    pattern: /single
-    defaults: { _controller: BlockPuzzleBundle:Game:single }
+single_new:
+    pattern: /single/new
+    defaults: { _controller: BlockPuzzleBundle:Single:new }
+
+single_play:
+    pattern: /single/play/{id}
+    defaults: { _controller: BlockPuzzleBundle:Single:play }
