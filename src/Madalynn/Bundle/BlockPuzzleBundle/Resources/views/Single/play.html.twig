@@ -1,7 +1,23 @@
 {% extends "BlockPuzzleBundle::layout.html.twig" %}
 
 {% block javascripts %}
-    <script src="{{ asset('/bundles/blockpuzzle/js/single.js') }}"></script>
+    <script>
+        var params  = {{ dump_parameters(level)|json_encode|raw }};
+        var tetrads = {{ dump_tetrads(level)|json_encode|raw }};
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    {% javascripts filter="?yui_js" output="js/single.js"
+        '@BlockPuzzleBundle/Resources/public/js/canvas.js'
+        '@BlockPuzzleBundle/Resources/public/js/single.js'
+    %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    <script>
+        $(document).ready(function() {
+            var game = new SingleGame('canvas', 500, 500);
+        });
+    </script>
 {% endblock %}
 
 {% block content %}

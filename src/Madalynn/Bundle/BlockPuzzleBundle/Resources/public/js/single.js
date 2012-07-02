@@ -9,15 +9,24 @@
 
 function SingleGame(canvas, width, height, tetrads)
 {
-    this.width   = width;
-    this.height  = height;
     this.tetrads = tetrads;
-    this.context = $(canvas)[0].getContext('2d');
+    this.canvas  = new Canvas(canvas, width, height);
 
+    this.initialize();
 }
 
-$(document).ready(function() {
-    var game = new SingleGame();
+/**
+ * Initializes the canvas
+ */
+SingleGame.prototype.initialize = function()
+{
+    this.drawCanvas();
+}
 
-    // @todo later
-})
+/**
+ * Draws the canvas
+ */
+SingleGame.prototype.drawCanvas = function()
+{
+    this.canvas.clear();
+}
