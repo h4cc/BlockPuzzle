@@ -42,7 +42,7 @@ SingleGame.prototype.initialize = function()
     setInterval(function() { that.drawCanvas(); }, REFRESH_INTERVAL);
 
     // listeners
-    $(this.canvas).bind('mouseup', function(e) { that.onMouseUpListener(e); });
+    $(this.canvas).bind('mouseup',   function(e) { that.onMouseUpListener(e); });
     $(this.canvas).bind('mousedown', function(e) { that.onMouseDownListener(e); });
     $(this.canvas).bind('mousemove', function(e) { that.onMouseMoveListener(e); });
 }
@@ -119,7 +119,16 @@ SingleGame.prototype.onMouseUpListener = function(e)
         return;
     }
 
+    var exactPosition = this.getMouse(e);
+    var droppingPosition = {
+        'x': Math.floor(exactPosition.x / BLOCK_SIZE),
+        'y': Math.floor(exactPosition.y / BLOCK_SIZE)
+    };
+
+    // @todo check collisions
+
     this.selection.dragging = false;
+    this.selection.position = droppingPosition;
     this.selection = null;
 
     this.invalidate();
