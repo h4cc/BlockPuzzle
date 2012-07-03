@@ -90,7 +90,7 @@ SingleGame.prototype.onMouseDownListener = function(e)
 
     this.selection = tetrad;
 
-    tetrad.floatingPosition = pos;
+    tetrad.initializeFloatingPosition(pos);
     tetrad.dragging = true;
 
     this.invalidate();
@@ -106,7 +106,7 @@ SingleGame.prototype.onMouseMoveListener = function(e)
     }
 
     // update the position
-    this.selection.floatingPosition = this.getMouse(e);
+    this.selection.updateFloatingPosition(this.getMouse(e));
     this.invalidate();
 }
 
@@ -119,10 +119,10 @@ SingleGame.prototype.onMouseUpListener = function(e)
         return;
     }
 
-    var exactPosition = this.getMouse(e);
+    var exactPosition = this.selection.updateFloatingPosition(this.getMouse(e));
     var droppingPosition = {
-        'x': Math.floor(exactPosition.x / BLOCK_SIZE),
-        'y': Math.floor(exactPosition.y / BLOCK_SIZE)
+        'x': Math.round(exactPosition.x / BLOCK_SIZE),
+        'y': Math.round(exactPosition.y / BLOCK_SIZE)
     };
 
     // @todo check collisions

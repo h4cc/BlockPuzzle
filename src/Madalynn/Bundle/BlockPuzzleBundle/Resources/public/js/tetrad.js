@@ -48,6 +48,32 @@ Tetrad.prototype.contains = function(pos)
 }
 
 /**
+ * Initializes the floating position and calculate
+ * the differential between the position and the top left
+ * possition of the tetrad
+ */
+Tetrad.prototype.initializeFloatingPosition = function(pos)
+{
+    this.floatingPosition = {
+        'x': this.position.x * BLOCK_SIZE,
+        'y': this.position.y * BLOCK_SIZE,
+        'dx': pos.x - this.position.x * BLOCK_SIZE,
+        'dy': pos.y - this.position.y * BLOCK_SIZE
+    };
+}
+
+/**
+ * Updates the floating position
+ */
+Tetrad.prototype.updateFloatingPosition = function(pos)
+{
+    return $.extend(this.floatingPosition, {
+        'x': pos.x - this.floatingPosition['dx'],
+        'y': pos.y - this.floatingPosition['dy']
+    });
+}
+
+/**
  * Draws the tetrad into a context
  */
 Tetrad.prototype.draw = function(ctx)
