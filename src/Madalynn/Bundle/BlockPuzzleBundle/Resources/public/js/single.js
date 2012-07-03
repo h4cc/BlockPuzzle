@@ -7,38 +7,28 @@
  * file that was distributed with this source code.
  */
 
-var BLOCK_SIZE = 50;
 var REFRESH_INTERVAL = 20;
 
 function SingleGame(canvas, width, height, tetrads)
 {
-    this.tetrads = tetrads;
-    this.width   = width;
-    this.height  = height;
-    this.valid   = false;
+    this.width     = width;
+    this.height    = height;
+    this.selection = null;
+    this.valid     = false;
 
-    this.mainCanvas  = document.getElementById(canvas);
-    this.mainCtx     = this.mainCanvas.getContext('2d');
+    this.tetrads = new Array();
+    for (var i = 0 ; i < tetrads.length ; i++) {
+        this.tetrads.push(new Tetrad(tetrads[i]));
+    }
 
-    this.mainCanvas.width  = width  * BLOCK_SIZE;
-    this.mainCanvas.height = height * BLOCK_SIZE;
+    this.canvas = document.getElementById(canvas);
+    this.ctx    = this.canvas.getContext('2d');
 
-    this.ghostCanvas = document.createElement('canvas');
-    this.ghostCtx    = this.ghostCanvas.getContext('2d');
-
-    this.ghostCanvas.width  = width  * BLOCK_SIZE;
-    this.ghostCanvas.height = height * BLOCK_SIZE;
-
-    $.each(this.tetrads, function(tetrad) {
-        $.extend(tetrad, {
-            'drag': false
-        });
-    });
+    this.canvas.width  = width  * BLOCK_SIZE;
+    this.canvas.height = height * BLOCK_SIZE;
 
     // Double clicking problem
-    this.mainCanvas.onselectstart = function () {
-        return false;
-    }
+    $(this.canvas).bind('selectstart', function(e) { e.preventDefault(); });
 
     this.initialize();
 }
@@ -52,8 +42,8 @@ SingleGame.prototype.initialize = function()
     setInterval(function() { that.drawCanvas(); }, REFRESH_INTERVAL);
 
     // listeners
-    $(this.mainCanvas).bind('mouseup', function(e) { that.onMouseUpListener(e); });
-    $(this.mainCanvas).bind('mousedown', function(e) { that.onMouseDownListener(e); });
+    $(this.canvas).bind('mouseup', function(e) { that.onMouseUpListener(e); });
+    $(this.canvas).bind('mousedown', function(e) { that.onMouseDownListener(e); });
 }
 
 /**
@@ -65,11 +55,11 @@ SingleGame.prototype.drawCanvas = function()
         return;
     }
 
-    this.clearCanvas(this.mainCtx);
+    this.clearCanvas();
 
     // tetrads
     for (var i = 0 ; i < this.tetrads.length ; i++) {
-        this.drawTetrad(this.tetrads[i]);
+        this.tetrads[i].draw(this.ctx);
     }
 
     // the canvas is now in a valid state
@@ -79,9 +69,9 @@ SingleGame.prototype.drawCanvas = function()
 /**
  * Clears a canvas
  */
-SingleGame.prototype.clearCanvas = function(ctx)
+SingleGame.prototype.clearCanvas = function()
 {
-    ctx.clearRect(0, 0, this.width, this.height);
+    this.ctx.clearRect(0, 0, this.width, this.height);
 }
 
 /**
@@ -101,31 +91,31 @@ SingleGame.prototype.onMouseDownListener = function(e)
 }
 
 /**
+ * Gets the mouse coordinates relative to the canvas
+ */
+SingleGame.prototype.getMouse = function(e)
+{
+    var element = this.canvas
+    var dx = 0;
+    var dy = 0;
+
+    if (element.offsetParent !== undefined) {
+        do {
+            dx += element.offsetLeft;
+            dy += element.offsetTop;
+        } while ((element = element.offsetParent));
+    }
+
+    return {
+        'x': e.clientX - dx + window.pageXOffset,
+        'y': e.clientY - dy + window.pageYOffset
+    };
+}
+
+/**
  * Invalidates the canvas
  */
 SingleGame.prototype.invalidate = function()
 {
     this.valid = false;
-}
-
-/**
- * Draws a tetrad on the canvas
- */
-SingleGame.prototype.drawTetrad = function(tetrad)
-{
-    var dx = tetrad.x;
-    var dy = tetrad.y;
-
-    // change the fill color
-    this.mainCtx.fillStyle = tetrad.color;
-
-    for (var i = 0 ; i < tetrad.blocks.length ; i++) {
-        var block = tetrad.blocks[i];
-
-        // Translate the block to his current location
-        var x = (dx + block.x) * BLOCK_SIZE;
-        var y = (dy + block.y) * BLOCK_SIZE;
-
-        this.mainCtx.fillRect(x, y, BLOCK_SIZE, BLOCK_SIZE);
-    }
 }
