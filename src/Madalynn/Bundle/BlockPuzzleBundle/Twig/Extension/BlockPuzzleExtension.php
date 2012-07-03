@@ -41,7 +41,9 @@ class BlockPuzzleExtension extends \Twig_Extension
                 'color'  => $tetrad->getColor(),
                 'width'  => $tetrad->getWidth(),
                 'height' => $tetrad->getHeight(),
-                'blocks' => $tetrad->getBlocks()
+                'blocks' => $tetrad->getBlocks(),
+                'x'      => 0,
+                'y'      => 0
             );
         }
 
