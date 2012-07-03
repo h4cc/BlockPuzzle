@@ -44,6 +44,7 @@ SingleGame.prototype.initialize = function()
     // listeners
     $(this.canvas).bind('mouseup', function(e) { that.onMouseUpListener(e); });
     $(this.canvas).bind('mousedown', function(e) { that.onMouseDownListener(e); });
+    $(this.canvas).bind('mousemove', function(e) { that.onMouseMoveListener(e); });
 }
 
 /**
@@ -59,27 +60,20 @@ SingleGame.prototype.drawCanvas = function()
 
     // tetrads
     for (var i = 0 ; i < this.tetrads.length ; i++) {
+        if (this.tetrads[i].dragging == true) {
+            // Draw the dragged tetrad at the end
+            continue;
+        }
+
         this.tetrads[i].draw(this.ctx);
+    }
+
+    if (null !== this.selection) {
+        this.selection.draw(this.ctx);
     }
 
     // the canvas is now in a valid state
     this.valid = true;
-}
-
-/**
- * Clears a canvas
- */
-SingleGame.prototype.clearCanvas = function()
-{
-    this.ctx.clearRect(0, 0, this.width * BLOCK_SIZE, this.height * BLOCK_SIZE);
-}
-
-/**
- * On mouse up event
- */
-SingleGame.prototype.onMouseUpListener = function(e)
-{
-    // @todo
 }
 
 /**
@@ -94,7 +88,41 @@ SingleGame.prototype.onMouseDownListener = function(e)
         return;
     }
 
-    // @todo move the tetrad
+    this.selection = tetrad;
+
+    tetrad.floatingPosition = pos;
+    tetrad.dragging = true;
+
+    this.invalidate();
+}
+
+/**
+ * On mouse move listener
+ */
+SingleGame.prototype.onMouseMoveListener = function(e)
+{
+    if (this.selection == null) {
+        return;
+    }
+
+    // update the position
+    this.selection.floatingPosition = this.getMouse(e);
+    this.invalidate();
+}
+
+/**
+ * On mouse up event
+ */
+SingleGame.prototype.onMouseUpListener = function(e)
+{
+    if (this.selection == null) {
+        return;
+    }
+
+    this.selection.dragging = false;
+    this.selection = null;
+
+    this.invalidate();
 }
 
 /**
@@ -131,6 +159,14 @@ SingleGame.prototype.findTetrad = function(pos)
     }
 
     return null;
+}
+
+/**
+ * Clears a canvas
+ */
+SingleGame.prototype.clearCanvas = function()
+{
+    this.ctx.clearRect(0, 0, this.width * BLOCK_SIZE, this.height * BLOCK_SIZE);
 }
 
 /**
