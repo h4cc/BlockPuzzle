@@ -31,26 +31,44 @@ function Tetrad(params)
 }
 
 /**
+ * Checks if the mouse position is on the current tetrad
+ */
+Tetrad.prototype.contains = function(pos)
+{
+    for (var i = 0 ; i < this.blocks.length ; i++) {
+        var x = (this.blocks[i].x + this.position.x) * BLOCK_SIZE;
+        var y = (this.blocks[i].y + this.position.y) * BLOCK_SIZE;
+
+        if (x <= pos.x && pos.x < x + BLOCK_SIZE && y <= pos.y && pos.y < y + BLOCK_SIZE) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+/**
  * Draws the tetrad into a context
  */
 Tetrad.prototype.draw = function(ctx)
 {
-    var dx = this.position.x;
-    var dy = this.position.y;
+    var dx, dy;
+
+    if (false == this.dragging) {
+        dx = this.position.x * BLOCK_SIZE;
+        dy = this.position.y * BLOCK_SIZE;
+    } else {
+        dx = this.floatingPosition.x;
+        dy = this.floatingPosition.y;
+    }
 
     // change the fill color
     ctx.fillStyle = this.color;
 
     for (var i = 0 ; i < this.blocks.length ; i++) {
-        var block = this.blocks[i], x, y;
-
-        if (false == this.dragging) {
-            x = (dx + block.x) * BLOCK_SIZE;
-            y = (dy + block.y) * BLOCK_SIZE;
-        } else {
-            x = this.floatingPosition.x;
-            y = this.floatingPosition.y;
-        }
+        var block = this.blocks[i];
+        var x = dx + block.x * BLOCK_SIZE;
+        var y = dy + block.y * BLOCK_SIZE;
 
         ctx.fillRect(x, y, BLOCK_SIZE, BLOCK_SIZE);
     }

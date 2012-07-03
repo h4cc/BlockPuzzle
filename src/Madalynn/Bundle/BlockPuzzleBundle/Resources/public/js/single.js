@@ -71,7 +71,7 @@ SingleGame.prototype.drawCanvas = function()
  */
 SingleGame.prototype.clearCanvas = function()
 {
-    this.ctx.clearRect(0, 0, this.width, this.height);
+    this.ctx.clearRect(0, 0, this.width * BLOCK_SIZE, this.height * BLOCK_SIZE);
 }
 
 /**
@@ -87,7 +87,14 @@ SingleGame.prototype.onMouseUpListener = function(e)
  */
 SingleGame.prototype.onMouseDownListener = function(e)
 {
-    // @todo
+    var pos    = this.getMouse(e);
+    var tetrad = this.findTetrad(pos);
+
+    if (tetrad == null) {
+        return;
+    }
+
+    // @todo move the tetrad
 }
 
 /**
@@ -110,6 +117,20 @@ SingleGame.prototype.getMouse = function(e)
         'x': e.clientX - dx + window.pageXOffset,
         'y': e.clientY - dy + window.pageYOffset
     };
+}
+
+/**
+ * Finds the first tetrad on the mouse position
+ */
+SingleGame.prototype.findTetrad = function(pos)
+{
+    for (var i = 0 ; i < this.tetrads.length ; i++) {
+        if (this.tetrads[i].contains(pos)){
+            return this.tetrads[i];
+        }
+    }
+
+    return null;
 }
 
 /**
