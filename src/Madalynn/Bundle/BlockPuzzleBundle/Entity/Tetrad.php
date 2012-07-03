@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Madalynn\Bundle\BlockPuzzleBundle\Document;
+namespace Madalynn\Bundle\BlockPuzzleBundle\Entity;
 
-use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+use Doctrine\ORM\Mapping as ORM;
 use Madalynn\Bundle\BlockPuzzleBundle\Util\ColorGenerator;
 
 /**
@@ -46,6 +46,12 @@ class Tetrad
      * @ORM\Column(type="integer")
      */
     protected $height;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Level", inversedBy="tetrads")
+     * @ORM\JoinColumn(name="level_id", referencedColumnName="id")
+     */
+    protected $level;
 
     /**
      * @ORM\Column(type="integer")
@@ -126,6 +132,28 @@ class Tetrad
     public function getHeight()
     {
         return $this->height;
+    }
+
+    /**
+     * Sets level
+     *
+     * @param Level $level A level instance
+     */
+    public function setLevel(Level $level)
+    {
+        $this->level = $level;
+
+        return $this;
+    }
+
+    /**
+     * Gets level
+     *
+     * @return Level
+     */
+    public function getLevel()
+    {
+        return $this->level;
     }
 
     public function setHeight($height)

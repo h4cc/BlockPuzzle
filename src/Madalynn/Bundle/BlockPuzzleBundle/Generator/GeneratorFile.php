@@ -11,8 +11,8 @@
 
 namespace Madalynn\Bundle\BlockPuzzleBundle\Generator;
 
-use Madalynn\Bundle\BlockPuzzleBundle\Document\Level;
-use Madalynn\Bundle\BlockPuzzleBundle\Document\Tetrad;
+use Madalynn\Bundle\BlockPuzzleBundle\Entity\Level;
+use Madalynn\Bundle\BlockPuzzleBundle\Entity\Tetrad;
 use Symfony\Component\Finder\Finder;
 
 class GeneratorFile implements GeneratorInterface

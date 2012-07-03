@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Madalynn\Bundle\BlockPuzzleBundle\Document;
+namespace Madalynn\Bundle\BlockPuzzleBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -23,8 +23,8 @@ class Level
 {
     /**
      * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(type="string")
+     * @ORM\GeneratedValue(strategy="NONE")
      */
     protected $id;
 
@@ -39,7 +39,7 @@ class Level
     protected $height;
 
     /**
-     * @ORM\OneToMany(targetEntity="Tetrad")
+     * @ORM\OneToMany(targetEntity="Tetrad", mappedBy="level", cascade={"persist", "remove", "merge"})
      */
     protected $tetrads;
 
