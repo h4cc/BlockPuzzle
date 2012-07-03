@@ -3,7 +3,7 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="block_puzzle.repository.level" class="Madalynn\Bundle\BlockPuzzleBundle\Repository\LevelRepository" factory-service="doctrine.odm.mongodb.document_manager" factory-method="getRepository">
+        <service id="block_puzzle.repository.level" class="Madalynn\Bundle\BlockPuzzleBundle\Repository\LevelRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
             <argument type="string">Madalynn\Bundle\BlockPuzzleBundle\Document\Level</argument>
         </service>
     </services>
