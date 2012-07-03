@@ -11,8 +11,8 @@
 
 namespace Madalynn\Bundle\BlockPuzzleBundle\Repository;
 
-use Doctrine\ODM\MongoDB\DocumentRepository;
+use Doctrine\ORM\EntityRepository;
 
-class LevelRepository extends DocumentRepository
+class LevelRepository extends EntityRepository
 {
 }

@@ -15,42 +15,45 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use Madalynn\Bundle\BlockPuzzleBundle\Util\ColorGenerator;
 
 /**
- * @MongoDB\EmbeddedDocument
+ * @ORM\Entity
+ * @ORM\Table(name="bp_tetrad")
  */
 class Tetrad
 {
     /**
-     * @MongoDB\Id
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 
     /**
-     * @MongoDB\String
+     * @ORM\Column(type="string", length=7)
      */
     protected $color;
 
     /**
-     * @MongoDB\Collection
+     * @ORM\Column(type="array")
      */
     protected $blocks;
 
     /**
-     * @MongoDB\Int
+     * @ORM\Column(type="integer")
      */
     protected $width;
 
     /**
-     * @MongoDB\Int
+     * @ORM\Column(type="integer")
      */
     protected $height;
 
     /**
-     * @MongoDB\Int
+     * @ORM\Column(type="integer")
      */
     protected $x;
 
     /**
-     * @MongoDB\Int
+     * @ORM\Column(type="integer")
      */
     protected $y;
 

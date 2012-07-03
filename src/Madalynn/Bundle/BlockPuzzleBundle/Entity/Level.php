@@ -11,42 +11,45 @@
 
 namespace Madalynn\Bundle\BlockPuzzleBundle\Document;
 
-use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Madalynn\Bundle\BlockPuzzleBundle\Util\KeyGenerator;
 
 /**
- * @MongoDB\Document(repositoryClass="Madalynn\Bundle\BlockPuzzleBundle\Repository\LevelRepository")
+ * @ORM\Entity(repositoryClass="Madalynn\Bundle\BlockPuzzleBundle\Repository\LevelRepository")
+ * @ORM\Table(name="bp_level")
  */
 class Level
 {
     /**
-     * @MongoDB\Id(strategy="none")
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 
     /**
-     * @MongoDB\Int
+     * @ORM\Column(type="integer")
      */
     protected $width;
 
     /**
-     * @MongoDB\Int
+     * @ORM\Column(type="integer")
      */
     protected $height;
 
     /**
-     * @MongoDB\EmbedMany(targetDocument="Tetrad")
+     * @ORM\OneToMany(targetEntity="Tetrad")
      */
     protected $tetrads;
 
     /**
-     * @MongoDB\Boolean
+     * @ORM\Column(type="boolean")
      */
     protected $finish;
 
     /**
-     * @MongoDB\Date
+     * @ORM\Column(type="date")
      */
     protected $createdAt;
 
