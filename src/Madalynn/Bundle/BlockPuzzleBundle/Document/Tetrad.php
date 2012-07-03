@@ -12,6 +12,7 @@
 namespace Madalynn\Bundle\BlockPuzzleBundle\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+use Madalynn\Bundle\BlockPuzzleBundle\Util\ColorGenerator;
 
 /**
  * @MongoDB\EmbeddedDocument
@@ -56,6 +57,7 @@ class Tetrad
     public function __construct()
     {
         $this->blocks = array();
+        $this->color  = ColorGenerator::generate();
     }
 
     public static function createFromXml(\SimpleXMLElement $root)

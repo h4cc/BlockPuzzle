@@ -116,6 +116,9 @@ SingleGame.prototype.drawTetrad = function(tetrad)
     var dx = tetrad.x;
     var dy = tetrad.y;
 
+    // change the fill color
+    this.mainCtx.fillStyle = tetrad.color;
+
     for (var i = 0 ; i < tetrad.blocks.length ; i++) {
         var block = tetrad.blocks[i];
 
