@@ -4,7 +4,7 @@
 
     <services>
         <service id="block_puzzle.repository.level" class="Madalynn\Bundle\BlockPuzzleBundle\Repository\LevelRepository" factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
-            <argument type="string">Madalynn\Bundle\BlockPuzzleBundle\Document\Level</argument>
+            <argument type="string">Madalynn\Bundle\BlockPuzzleBundle\Entity\Level</argument>
         </service>
     </services>
 </container>

@@ -18,6 +18,7 @@ use Madalynn\Bundle\BlockPuzzleBundle\Util\KeyGenerator;
 /**
  * @ORM\Entity(repositoryClass="Madalynn\Bundle\BlockPuzzleBundle\Repository\LevelRepository")
  * @ORM\Table(name="bp_level")
+ * @ORM\HasLifecycleCallbacks
  */
 class Level
 {
@@ -39,7 +40,7 @@ class Level
     protected $height;
 
     /**
-     * @ORM\OneToMany(targetEntity="Tetrad", mappedBy="level", cascade={"persist", "remove", "merge"})
+     * @ORM\OneToMany(targetEntity="Tetrad", mappedBy="level", cascade={"persist", "remove"})
      */
     protected $tetrads;
 
@@ -49,17 +50,18 @@ class Level
     protected $finish;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="datetime")
      */
-    protected $createdAt;
+    protected $created;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->id = KeyGenerator::generate(8);
+        $this->id      = KeyGenerator::generate(8);
         $this->tetrads = new ArrayCollection();
+        $this->finish  = false;
     }
 
     /**
@@ -79,6 +81,7 @@ class Level
      */
     public function addTetrad(Tetrad $tetrad)
     {
+        $tetrad->setLevel($this);
         $this->tetrads[] = $tetrad;
     }
 
@@ -165,20 +168,20 @@ class Level
     }
 
     /**
-     * Get createdAt
+     * Get created
      *
-     * @return date $createdAt
+     * @return date $created
      */
-    public function getCreatedAt()
+    public function getCreated()
     {
-        return $this->createdAt;
+        return $this->created;
     }
 
     /**
-     * @MongoDB\PrePersist
+     * @ORM\PrePersist
      */
     public function prePersist()
     {
-        $this->createdAt = new \DateTime();
+        $this->created = new \DateTime();
     }
 }

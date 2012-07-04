@@ -48,7 +48,7 @@ class Tetrad
     protected $height;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Level", inversedBy="tetrads")
+     * @ORM\ManyToOne(targetEntity="Level", inversedBy="tetrads", cascade={"remove"})
      * @ORM\JoinColumn(name="level_id", referencedColumnName="id")
      */
     protected $level;
