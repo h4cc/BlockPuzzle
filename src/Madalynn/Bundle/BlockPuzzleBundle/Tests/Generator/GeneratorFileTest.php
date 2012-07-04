@@ -29,9 +29,9 @@ class GeneratorFileTest extends \PHPUnit_Framework_TestCase
 
     public function testReturnInstanceOfLevel()
     {
-        $this->assertInstanceOf('Madalynn\\Bundle\\BlockPuzzleBundle\\Document\\Level', $this->generator->generate(GeneratorInterface::EASY));
-        $this->assertInstanceOf('Madalynn\\Bundle\\BlockPuzzleBundle\\Document\\Level', $this->generator->generate(GeneratorInterface::EXTREM));
-        $this->assertInstanceOf('Madalynn\\Bundle\\BlockPuzzleBundle\\Document\\Level', $this->generator->generate(GeneratorInterface::HARD));
-        $this->assertInstanceOf('Madalynn\\Bundle\\BlockPuzzleBundle\\Document\\Level', $this->generator->generate(GeneratorInterface::MDEDIUM));
+        $this->assertInstanceOf('Madalynn\\Bundle\\BlockPuzzleBundle\\Entity\\Level', $this->generator->generate(GeneratorInterface::EASY));
+        $this->assertInstanceOf('Madalynn\\Bundle\\BlockPuzzleBundle\\Entity\\Level', $this->generator->generate(GeneratorInterface::EXTREM));
+        $this->assertInstanceOf('Madalynn\\Bundle\\BlockPuzzleBundle\\Entity\\Level', $this->generator->generate(GeneratorInterface::HARD));
+        $this->assertInstanceOf('Madalynn\\Bundle\\BlockPuzzleBundle\\Entity\\Level', $this->generator->generate(GeneratorInterface::MDEDIUM));
     }
 }
