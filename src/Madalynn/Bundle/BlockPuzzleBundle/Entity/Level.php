@@ -9,54 +9,59 @@
  * file that was distributed with this source code.
  */
 
-namespace Madalynn\Bundle\BlockPuzzleBundle\Document;
+namespace Madalynn\Bundle\BlockPuzzleBundle\Entity;
 
-use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Madalynn\Bundle\BlockPuzzleBundle\Util\KeyGenerator;
 
 /**
- * @MongoDB\Document(repositoryClass="Madalynn\Bundle\BlockPuzzleBundle\Repository\LevelRepository")
+ * @ORM\Entity(repositoryClass="Madalynn\Bundle\BlockPuzzleBundle\Repository\LevelRepository")
+ * @ORM\Table(name="bp_level")
+ * @ORM\HasLifecycleCallbacks
  */
 class Level
 {
     /**
-     * @MongoDB\Id(strategy="none")
+     * @ORM\Id
+     * @ORM\Column(type="string")
+     * @ORM\GeneratedValue(strategy="NONE")
      */
     protected $id;
 
     /**
-     * @MongoDB\Int
+     * @ORM\Column(type="integer")
      */
     protected $width;
 
     /**
-     * @MongoDB\Int
+     * @ORM\Column(type="integer")
      */
     protected $height;
 
     /**
-     * @MongoDB\EmbedMany(targetDocument="Tetrad")
+     * @ORM\OneToMany(targetEntity="Tetrad", mappedBy="level", cascade={"persist", "remove"})
      */
     protected $tetrads;
 
     /**
-     * @MongoDB\Boolean
+     * @ORM\Column(type="boolean")
      */
     protected $finish;
 
     /**
-     * @MongoDB\Date
+     * @ORM\Column(type="datetime")
      */
-    protected $createdAt;
+    protected $created;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->id = KeyGenerator::generate(8);
+        $this->id      = KeyGenerator::generate(8);
         $this->tetrads = new ArrayCollection();
+        $this->finish  = false;
     }
 
     /**
@@ -76,6 +81,7 @@ class Level
      */
     public function addTetrad(Tetrad $tetrad)
     {
+        $tetrad->setLevel($this);
         $this->tetrads[] = $tetrad;
     }
 
@@ -162,20 +168,20 @@ class Level
     }
 
     /**
-     * Get createdAt
+     * Get created
      *
-     * @return date $createdAt
+     * @return date $created
      */
-    public function getCreatedAt()
+    public function getCreated()
     {
-        return $this->createdAt;
+        return $this->created;
     }
 
     /**
-     * @MongoDB\PrePersist
+     * @ORM\PrePersist
      */
     public function prePersist()
     {
-        $this->createdAt = new \DateTime();
+        $this->created = new \DateTime();
     }
 }

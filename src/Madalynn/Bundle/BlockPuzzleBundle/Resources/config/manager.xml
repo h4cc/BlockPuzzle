@@ -9,7 +9,7 @@
     <services>
         <service id="block_puzzle.level.manager" class="%block_puzzle.level.manager.class%">
             <argument type="service" id="block_puzzle.generator" />
-            <argument type="service" id="doctrine.odm.mongodb.document_manager" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
     </services>
 </container>

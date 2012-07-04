@@ -12,7 +12,7 @@
 namespace Madalynn\Bundle\BlockPuzzleBundle\Level;
 
 use Madalynn\Bundle\BlockPuzzleBundle\Generator\GeneratorInterface;
-use Doctrine\ODM\MongoDB\DocumentManager;
+use Doctrine\ORM\EntityManager;
 
 /**
  * The level manager
@@ -27,9 +27,9 @@ class Manager
     protected $generator;
 
     /**
-     * The document manager
+     * The entity manager
      *
-     * @var DocumentManager
+     * @var EntityManager
      */
     protected $manager;
 
@@ -38,7 +38,7 @@ class Manager
      *
      * @param GeneratorInterface $generator
      */
-    public function __construct(GeneratorInterface $generator, DocumentManager $manager)
+    public function __construct(GeneratorInterface $generator, EntityManager $manager)
     {
         $this->generator = $generator;
         $this->manager   = $manager;

@@ -1,0 +1,22 @@
+language: php
+
+php:
+  - 5.3
+  - 5.4
+
+before_script:
+    - cp app/config/parameters.yml.test app/config/parameters.yml
+    - curl -s http://getcomposer.org/installer | php
+    - php composer.phar --dev install
+    - ./bin/travis.sh
+
+script:
+    - phpunit -c app/
+
+branches:
+    only:
+        - master
+
+notifications:
+    email:
+        - mewt@madalynn.eu

@@ -11,7 +11,7 @@
 
 namespace Madalynn\Bundle\BlockPuzzleBundle\Twig\Extension;
 
-use Madalynn\Bundle\BlockPuzzleBundle\Document\Level;
+use Madalynn\Bundle\BlockPuzzleBundle\Entity\Level;
 
 class BlockPuzzleExtension extends \Twig_Extension
 {

@@ -9,48 +9,57 @@
  * file that was distributed with this source code.
  */
 
-namespace Madalynn\Bundle\BlockPuzzleBundle\Document;
+namespace Madalynn\Bundle\BlockPuzzleBundle\Entity;
 
-use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+use Doctrine\ORM\Mapping as ORM;
 use Madalynn\Bundle\BlockPuzzleBundle\Util\ColorGenerator;
 
 /**
- * @MongoDB\EmbeddedDocument
+ * @ORM\Entity
+ * @ORM\Table(name="bp_tetrad")
  */
 class Tetrad
 {
     /**
-     * @MongoDB\Id
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 
     /**
-     * @MongoDB\String
+     * @ORM\Column(type="string", length=7)
      */
     protected $color;
 
     /**
-     * @MongoDB\Collection
+     * @ORM\Column(type="array")
      */
     protected $blocks;
 
     /**
-     * @MongoDB\Int
+     * @ORM\Column(type="integer")
      */
     protected $width;
 
     /**
-     * @MongoDB\Int
+     * @ORM\Column(type="integer")
      */
     protected $height;
 
     /**
-     * @MongoDB\Int
+     * @ORM\ManyToOne(targetEntity="Level", inversedBy="tetrads", cascade={"remove"})
+     * @ORM\JoinColumn(name="level_id", referencedColumnName="id")
+     */
+    protected $level;
+
+    /**
+     * @ORM\Column(type="integer")
      */
     protected $x;
 
     /**
-     * @MongoDB\Int
+     * @ORM\Column(type="integer")
      */
     protected $y;
 
@@ -123,6 +132,28 @@ class Tetrad
     public function getHeight()
     {
         return $this->height;
+    }
+
+    /**
+     * Sets level
+     *
+     * @param Level $level A level instance
+     */
+    public function setLevel(Level $level)
+    {
+        $this->level = $level;
+
+        return $this;
+    }
+
+    /**
+     * Gets level
+     *
+     * @return Level
+     */
+    public function getLevel()
+    {
+        return $this->level;
     }
 
     public function setHeight($height)
