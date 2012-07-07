@@ -1,3 +1,9 @@
 body {
   padding-top: 60px;
 }
+
+canvas {
+  background: url('/bundles/blockpuzzle/images/canvas-background.gif');
+  margin: 0 auto;
+  display: block;
+}

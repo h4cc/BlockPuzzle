@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-var BLOCK_SIZE = 50;
+var BLOCK_SIZE = 25;
 
 function Tetrad(params)
 {
@@ -88,14 +88,17 @@ Tetrad.prototype.draw = function(ctx)
         dy = this.floatingPosition.y;
     }
 
-    // change the fill color
-    ctx.fillStyle = this.color;
-
     for (var i = 0 ; i < this.blocks.length ; i++) {
         var block = this.blocks[i];
         var x = dx + block.x * BLOCK_SIZE;
         var y = dy + block.y * BLOCK_SIZE;
 
+        // Creation of the gradient
+        var grad = ctx.createLinearGradient(x, y, x + BLOCK_SIZE, y + BLOCK_SIZE);
+        grad.addColorStop(0, '#dddddd');
+        grad.addColorStop(1, '#868686');
+
+        ctx.fillStyle = grad;
         ctx.fillRect(x, y, BLOCK_SIZE, BLOCK_SIZE);
     }
 }

@@ -11,10 +11,18 @@ var REFRESH_INTERVAL = 20;
 
 function SingleGame(canvas, width, height, tetrads)
 {
-    this.width     = width;
-    this.height    = height;
+    this.b_width   = width;
+    this.b_height  = height;
+    this.width     = (width % 2 == 0) ? 2 * width : 2 * width + 1;
+    this.height    = (height % 2 == 0) ? 2 * height : 2 * height + 1;
     this.selection = null;
     this.valid     = false;
+
+    // The position
+    this.startingPosition = {
+        'x': (this.width - this.b_width) / 2,
+        'y': (this.height - this.b_height) / 2
+    };
 
     this.tetrads = new Array();
     for (var i = 0 ; i < tetrads.length ; i++) {
@@ -24,8 +32,8 @@ function SingleGame(canvas, width, height, tetrads)
     this.canvas = document.getElementById(canvas);
     this.ctx    = this.canvas.getContext('2d');
 
-    this.canvas.width  = width  * BLOCK_SIZE;
-    this.canvas.height = height * BLOCK_SIZE;
+    this.canvas.width  = this.width  * BLOCK_SIZE;
+    this.canvas.height = this.height * BLOCK_SIZE;
 
     // Double clicking problem
     $(this.canvas).bind('selectstart', function(e) { e.preventDefault(); });
@@ -176,6 +184,14 @@ SingleGame.prototype.findTetrad = function(pos)
 SingleGame.prototype.clearCanvas = function()
 {
     this.ctx.clearRect(0, 0, this.width * BLOCK_SIZE, this.height * BLOCK_SIZE);
+
+    this.ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
+    this.ctx.fillRect(
+        this.startingPosition.x * BLOCK_SIZE,
+        this.startingPosition.y * BLOCK_SIZE,
+        this.b_width * BLOCK_SIZE,
+        this.b_height * BLOCK_SIZE
+    );
 }
 
 /**
