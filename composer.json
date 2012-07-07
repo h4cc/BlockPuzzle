@@ -12,6 +12,7 @@
         "symfony/monolog-bundle": "dev-master",
         "sensio/distribution-bundle": "dev-master"
     },
+    "minimum-stability": "dev",
     "autoload": {
         "psr-0": {
             "": "src/"
