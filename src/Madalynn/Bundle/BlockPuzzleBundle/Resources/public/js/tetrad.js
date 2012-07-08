@@ -11,6 +11,7 @@ var BLOCK_SIZE = 25;
 
 function Tetrad(params)
 {
+    this.id       = params.id
     this.blocks   = params.blocks;
     this.width    = params.width;
     this.height   = params.height;
@@ -41,6 +42,26 @@ Tetrad.prototype.contains = function(pos)
 
         if (x <= pos.x && pos.x < x + BLOCK_SIZE && y <= pos.y && pos.y < y + BLOCK_SIZE) {
             return true;
+        }
+    }
+
+    return false;
+}
+
+/**
+ * Returns true if the current tetrad has a collision with
+ * the tetrad in the dropping position
+ */
+Tetrad.prototype.hasCollisionWith = function(tetrad, pos)
+{
+    for (var i = 0 ; i < this.blocks.length ; i++) {
+        for (var j = 0 ; j < tetrad.blocks.length ; j++) {
+            var b1 = this.blocks[i];
+            var b2 = tetrad.blocks[j];
+
+            if (b1.x + this.position.x == b2.x + pos.x && b1.y + this.position.y == b2.y + pos.y) {
+                return true;
+            }
         }
     }
 
@@ -95,14 +116,14 @@ Tetrad.prototype.draw = function(ctx)
 
         // Creation of the gradient
         var grad = ctx.createLinearGradient(x, y, x + BLOCK_SIZE, y + BLOCK_SIZE);
-        grad.addColorStop(0, '#dddddd');
-        grad.addColorStop(1, '#868686');
+        grad.addColorStop(0, '#e5e5e5');
+        grad.addColorStop(1, '#686868');
 
         ctx.fillStyle = grad;
         ctx.fillRect(x, y, BLOCK_SIZE, BLOCK_SIZE);
 
         // Color layer
-        ctx.fillStyle = 'rgba('+this.color.r+','+this.color.g+','+this.color.b+',0.4)';
+        ctx.fillStyle = 'rgba('+this.color.r+','+this.color.g+','+this.color.b+',0.5)';
         ctx.fillRect(x, y, BLOCK_SIZE, BLOCK_SIZE);
     }
 }

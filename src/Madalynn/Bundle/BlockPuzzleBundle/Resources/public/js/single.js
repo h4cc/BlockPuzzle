@@ -133,12 +133,14 @@ SingleGame.prototype.onMouseUpListener = function(e)
         'y': Math.round(exactPosition.y / BLOCK_SIZE)
     };
 
-    // @todo check collisions
-
     this.selection.dragging = false;
-    this.selection.position = droppingPosition;
-    this.selection = null;
 
+    // check collisions
+    if (false == this.checkCollision(droppingPosition)) {
+        this.selection.position = droppingPosition;
+    }
+
+    this.selection = null;
     this.invalidate();
 }
 
@@ -179,12 +181,32 @@ SingleGame.prototype.findTetrad = function(pos)
 }
 
 /**
- * Clears a canvas
+ * Checks for collision between the selection tetrad
+ * and the other tetrads
+ */
+SingleGame.prototype.checkCollision = function(pos)
+{
+    for (var i = 0 ; i < this.tetrads.length ; i++) {
+        if (this.tetrads[i].id == this.selection.id) {
+            continue;
+        }
+
+        if (this.tetrads[i].hasCollisionWith(this.selection, pos)){
+            return true;
+        }
+    }
+
+    return false;
+}
+
+/**
+ * Clears the canvas
  */
 SingleGame.prototype.clearCanvas = function()
 {
     this.ctx.clearRect(0, 0, this.width * BLOCK_SIZE, this.height * BLOCK_SIZE);
 
+    // Creation of the black box
     this.ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
     this.ctx.fillRect(
         this.startingPosition.x * BLOCK_SIZE,

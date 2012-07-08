@@ -38,6 +38,7 @@ class BlockPuzzleExtension extends \Twig_Extension
         $data = array();
         foreach ($level->getTetrads() as $tetrad) {
             $data[] = array(
+                'id'     => $tetrad->getId(),
                 'color'  => $tetrad->getColor(),
                 'width'  => $tetrad->getWidth(),
                 'height' => $tetrad->getHeight(),
