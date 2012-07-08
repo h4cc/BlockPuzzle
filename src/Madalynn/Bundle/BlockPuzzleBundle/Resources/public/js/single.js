@@ -9,8 +9,9 @@
 
 var REFRESH_INTERVAL = 20;
 
-function SingleGame(canvas, width, height, tetrads)
+function SingleGame(canvas, id, width, height, tetrads)
 {
+    this.id        = id;
     this.b_width   = width;
     this.b_height  = height;
     this.width     = (width % 2 == 0) ? 2 * width : 2 * width + 1;
@@ -36,7 +37,7 @@ function SingleGame(canvas, width, height, tetrads)
     this.canvas.height = this.height * BLOCK_SIZE;
 
     // Double clicking problem
-    $(this.canvas).bind('selectstart', function(e) { e.preventDefault(); });
+    $(this.canvas).bind('selectstart', function(e) { e.preventDefault(); return false; });
 
     this.initialize();
 }
@@ -184,10 +185,24 @@ SingleGame.prototype.checkVictory = function()
             break;
         }
     }
+}
 
-    if (true == end) {
-        // @todo ajax request
+/**
+ * Gets the current position of tetrads
+ */
+SingleGame.prototype.getTetradsPosition = function()
+{
+    var tetrads = new Array();
+    for (var i = 0 ; i <  this.tetrads.length ; i++) {
+        var t = this.tetrads[i];
+        tetrads.push({
+            'id': t.id,
+            'x': t.position.x,
+            'y': t.position.y
+        })
     }
+
+    return tetrads;
 }
 
 /**

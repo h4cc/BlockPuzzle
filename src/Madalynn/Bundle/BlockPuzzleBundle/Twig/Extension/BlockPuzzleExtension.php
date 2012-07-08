@@ -57,8 +57,9 @@ class BlockPuzzleExtension extends \Twig_Extension
     public function dumpParameters(Level $level)
     {
         return array(
+            'id'     => $level->getId(),
             'width'  => $level->getWidth(),
-            'height' => $level->getHeight()
+            'height' => $level->getHeight(),
         );
     }
 

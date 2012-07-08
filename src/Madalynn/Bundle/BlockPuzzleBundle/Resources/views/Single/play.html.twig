@@ -15,7 +15,7 @@
     {% endjavascripts %}
     <script>
         $(document).ready(function() {
-            var game = new SingleGame('canvas', params.width, params.height, tetrads);
+            var game = new SingleGame('canvas', params.id, params.width, params.height, tetrads);
         });
     </script>
 {% endblock %}

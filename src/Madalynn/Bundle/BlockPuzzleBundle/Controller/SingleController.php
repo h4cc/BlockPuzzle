@@ -12,6 +12,7 @@
 namespace Madalynn\Bundle\BlockPuzzleBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class SingleController extends Controller
 {
@@ -38,5 +39,10 @@ class SingleController extends Controller
         return $this->render('BlockPuzzleBundle:Single:play.html.twig', array(
             'level' => $level
         ));
+    }
+
+    public function checkAction($id)
+    {
+        return new JsonResponse();
     }
 }

@@ -9,3 +9,11 @@ single_new:
 single_play:
     pattern: /single/play/{id}
     defaults: { _controller: BlockPuzzleBundle:Single:play }
+    requirements:
+        _method: GET
+
+ajax_single_play:
+    pattern: /ajax/single/check/{id}
+    defaults: { _controller: BlockPuzzleBundle:Single:check }
+    requirements:
+        _method: POST
