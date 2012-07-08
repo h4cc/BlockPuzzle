@@ -28,7 +28,7 @@ class Tetrad
     protected $id;
 
     /**
-     * @ORM\Column(type="string", length=7)
+     * @ORM\Column(type="array")
      */
     protected $color;
 

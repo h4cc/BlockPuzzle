@@ -100,5 +100,9 @@ Tetrad.prototype.draw = function(ctx)
 
         ctx.fillStyle = grad;
         ctx.fillRect(x, y, BLOCK_SIZE, BLOCK_SIZE);
+
+        // Color layer
+        ctx.fillStyle = 'rgba('+this.color.r+','+this.color.g+','+this.color.b+',0.4)';
+        ctx.fillRect(x, y, BLOCK_SIZE, BLOCK_SIZE);
     }
 }

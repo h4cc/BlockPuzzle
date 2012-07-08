@@ -15,13 +15,10 @@ class ColorGenerator
 {
     static public function generate()
     {
-        $c = '#'.strtoupper(dechex(rand(0,10000000)));
-
-        if (7 !== strlen($c)){
-            $c = str_pad($c, 10, '0', STR_PAD_RIGHT);
-            $c = substr($c, 0, 7);
-        }
-
-        return $c;
+        return array(
+            'r' => rand(0, 255),
+            'g' => rand(0, 255),
+            'b' => rand(0, 255),
+        );
     }
 }
