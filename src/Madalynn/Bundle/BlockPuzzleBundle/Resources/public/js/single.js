@@ -199,7 +199,7 @@ SingleGame.prototype.getTetradsPosition = function()
             'id': t.id,
             'x': t.position.x,
             'y': t.position.y
-        })
+        });
     }
 
     return tetrads;
