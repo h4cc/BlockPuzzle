@@ -138,6 +138,9 @@ SingleGame.prototype.onMouseUpListener = function(e)
     // check collisions
     if (false == this.checkCollision(droppingPosition)) {
         this.selection.position = droppingPosition;
+
+        // we need to check now if the game is over or not
+        this.checkVictory();
     }
 
     this.selection = null;
@@ -164,6 +167,27 @@ SingleGame.prototype.getMouse = function(e)
         'x': e.clientX - dx + window.pageXOffset,
         'y': e.clientY - dy + window.pageYOffset
     };
+}
+
+/**
+ * Checks if the game is over by looking the position
+ * of all tetrads
+ */
+SingleGame.prototype.checkVictory = function()
+{
+    var end = true;
+    for (var i = 0 ; i < this.tetrads.length ; i++) {
+        var t = this.tetrads[i];
+        if (this.startingPosition.x > t.position.x || t.position.x >= this.startingPosition.x + this.b_width ||
+            this.startingPosition.y > t.position.y || t.position.y >= this.startingPosition.y + this.b_height ) {
+            end = false;
+            break;
+        }
+    }
+
+    if (true == end) {
+        // @todo ajax request
+    }
 }
 
 /**
