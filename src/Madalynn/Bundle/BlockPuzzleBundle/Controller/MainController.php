@@ -12,6 +12,8 @@
 namespace Madalynn\Bundle\BlockPuzzleBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 /**
  * Main Controller
@@ -20,8 +22,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  */
 class MainController extends Controller
 {
+    /**
+     * @Route("/", name="homepage")
+     * @Template
+     */
     public function homepageAction()
     {
-        return $this->render('BlockPuzzleBundle:Main:homepage.html.twig');
+        return array();
     }
 }

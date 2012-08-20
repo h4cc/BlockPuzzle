@@ -4,13 +4,14 @@
     "require": {
         "php": ">=5.4",
         "symfony/symfony": "2.1.*",
-        "doctrine/orm": "2.2.*",
-        "doctrine/doctrine-bundle": "dev-master",
-        "twig/extensions": "dev-master",
         "symfony/assetic-bundle": "dev-master",
         "symfony/swiftmailer-bundle": "dev-master",
         "symfony/monolog-bundle": "dev-master",
-        "sensio/distribution-bundle": "dev-master"
+        "doctrine/orm": "2.2.*",
+        "doctrine/doctrine-bundle": "dev-master",
+        "sensio/distribution-bundle": "dev-master",
+        "sensio/framework-extra-bundle": "dev-master",
+        "twig/extensions": "dev-master"
     },
     "minimum-stability": "dev",
     "autoload": {

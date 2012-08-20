@@ -13,9 +13,17 @@ namespace Madalynn\Bundle\BlockPuzzleBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
+/**
+ * @Route("/single")
+ */
 class SingleController extends Controller
 {
+    /**
+     * @Route("/new", name="single_new")
+     */
     public function newAction()
     {
         $manager = $this->get('block_puzzle.level.manager');
@@ -26,6 +34,10 @@ class SingleController extends Controller
         )));
     }
 
+    /**
+     * @Route("/play/{id}", name="single_play")
+     * @Template
+     */
     public function playAction($id)
     {
         $level = $this->get('block_puzzle.repository.level')->find($id);
@@ -36,11 +48,12 @@ class SingleController extends Controller
 
         // @todo check if the game is over
 
-        return $this->render('BlockPuzzleBundle:Single:play.html.twig', array(
-            'level' => $level
-        ));
+        return array('level' => $level);
     }
 
+    /**
+     * @Route("/check/{id}", name="single_check")
+     */
     public function checkAction($id)
     {
         return new JsonResponse();

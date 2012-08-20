@@ -1,5 +1,5 @@
 {
-    "hash": "e65142a664ca6308d43af05e727ca823",
+    "hash": "b3c9257370b24df8fddbba18457fa640",
     "packages": [
         {
             "package": "doctrine/common",
@@ -44,6 +44,18 @@
             "version": "dev-master",
             "source-reference": "bd98b5fb0e4a5dddb4f7acd2e11f28c4cd7eacee",
             "commit-date": "1345139690"
+        },
+        {
+            "package": "sensio/framework-extra-bundle",
+            "version": "dev-master",
+            "alias-pretty-version": "2.1.x-dev",
+            "alias-version": "2.1.9999999.9999999-dev"
+        },
+        {
+            "package": "sensio/framework-extra-bundle",
+            "version": "dev-master",
+            "source-reference": "ade2d53b20a9fc3428f04c863b3fd4fca0b62181",
+            "commit-date": "1344072374"
         },
         {
             "package": "swiftmailer/swiftmailer",
@@ -112,11 +124,12 @@
     ],
     "minimum-stability": "dev",
     "stability-flags": {
-        "doctrine/doctrine-bundle": 20,
-        "twig/extensions": 20,
         "symfony/assetic-bundle": 20,
         "symfony/swiftmailer-bundle": 20,
         "symfony/monolog-bundle": 20,
-        "sensio/distribution-bundle": 20
+        "doctrine/doctrine-bundle": 20,
+        "sensio/distribution-bundle": 20,
+        "sensio/framework-extra-bundle": 20,
+        "twig/extensions": 20
     }
 }
