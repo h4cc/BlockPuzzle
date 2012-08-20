@@ -3,29 +3,29 @@ imports:
     - { resource: security.yml }
 
 framework:
-    translator:      { fallback: %locale% }
-    secret:          %secret%
+    translator: { fallback: %locale% }
+    secret: %secret%
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
-        strict_parameters: %kernel.debug%
-    form:            true
+        strict_requirements: %kernel.debug%
+    form: true
     csrf_protection: true
-    validation:      { enable_annotations: true }
+    validation: { enable_annotations: true }
     templating:
-        engines:               ['twig']
-        assets_version:        2012062101
+        engines: ['twig']
+        assets_version: 2012062101
         assets_version_format: %%s?v=%%s
-    default_locale:  %locale%
-    session:          ~
+    default_locale: %locale%
+    session: ~
 
 # Twig Configuration
 twig:
-    debug:            %kernel.debug%
+    debug: %kernel.debug%
     strict_variables: %kernel.debug%
 
 # Assetic Configuration
 assetic:
-    debug:          %kernel.debug%
+    debug: %kernel.debug%
     use_controller: false
     #java: /usr/bin/java
     filters:
@@ -38,13 +38,13 @@ assetic:
 # Doctrine Configuration
 doctrine:
     dbal:
-        driver:   %database_driver%
-        host:     %database_host%
-        port:     %database_port%
-        dbname:   %database_name%
-        user:     %database_user%
+        driver: %database_driver%
+        host: %database_host%
+        port: %database_port%
+        dbname: %database_name%
+        user: %database_user%
         password: %database_password%
-        charset:  UTF8
+        charset: UTF8
     orm:
         auto_generate_proxy_classes: %kernel.debug%
         auto_mapping: true
@@ -52,7 +52,7 @@ doctrine:
 # Swiftmailer Configuration
 swiftmailer:
     transport: %mailer_transport%
-    host:      %mailer_host%
-    username:  %mailer_user%
-    password:  %mailer_password%
-    spool:     { type: memory }
+    host: %mailer_host%
+    username: %mailer_user%
+    password: %mailer_password%
+    spool: { type: memory }
